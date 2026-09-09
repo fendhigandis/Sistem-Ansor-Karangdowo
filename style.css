@@ -1,0 +1,139 @@
+:root {
+    --space-dark: #050b0f;
+    --ansor-emerald: #00a859;
+    --ansor-gold: #ffd700;
+    --glass-bg: rgba(255, 255, 255, 0.04);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --text-primary: #e2f1ec;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
+body { background: var(--space-dark); color: var(--text-primary); overflow: hidden; perspective: 1000px; }
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
+::-webkit-scrollbar-thumb { background: var(--ansor-emerald); border-radius: 4px; }
+
+/* Background 3D */
+.ambient-background { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; }
+.orb { position: absolute; border-radius: 50%; filter: blur(120px); animation: floatOrb 25s infinite alternate ease-in-out; will-change: transform; }
+.orb-1 { width: 45vw; height: 45vw; background: rgba(0, 168, 89, 0.25); top: -10%; left: -10%; }
+.orb-2 { width: 50vw; height: 50vw; background: rgba(0, 50, 20, 0.5); bottom: -20%; right: -10%; animation-delay: -5s; }
+.orb-3 { width: 30vw; height: 30vw; background: rgba(255, 215, 0, 0.1); top: 30%; left: 30%; animation-duration: 30s; }
+@keyframes floatOrb { 100% { transform: translate(150px, 200px) scale(1.1); } }
+
+/* Layout Induk */
+.glass-container { display: flex; height: 96vh; width: 98vw; margin: 2vh auto; background: var(--glass-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border-radius: 20px; border: 1px solid var(--glass-border); box-shadow: 0 30px 60px rgba(0,0,0,0.6); overflow: hidden; }
+.workspace { flex: 1; display: flex; flex-direction: column; overflow: hidden; position: relative; }
+#hologram-views { padding: 30px 40px; overflow-y: auto; height: 100%; perspective: 1000px; scroll-behavior: smooth; }
+.view-layer { display: none; animation: hologramFade 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; opacity: 0; transform: translateY(20px) translateZ(-50px) rotateX(5deg); }
+.view-layer.active { display: block; }
+@keyframes hologramFade { to { opacity: 1; transform: translateY(0) translateZ(0) rotateX(0); } }
+
+/* Sidebar */
+.glass-sidebar { width: 280px; background: rgba(0, 15, 8, 0.5); border-right: 1px solid var(--glass-border); display: flex; flex-direction: column; }
+.brand-glow { padding: 30px 20px; display: flex; align-items: center; gap: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.logo-3d { width: 55px; height: 55px; object-fit: contain; filter: drop-shadow(0 0 12px var(--ansor-gold)); }
+.brand-glow h2 { font-size: 1.4rem; font-weight: 800; letter-spacing: 1px; text-shadow: 0 0 10px var(--ansor-emerald); }
+.brand-glow span { color: var(--ansor-gold); }
+.ranting-name { font-size: 0.8rem; color: #aaa; text-transform: uppercase; letter-spacing: 2px; margin-top: 2px; }
+.nav-3d { padding: 25px 15px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.nav-item { padding: 16px 20px; color: #a0b2ab; text-decoration: none; border-radius: 12px; transition: all 0.3s; display: flex; align-items: center; gap: 12px; font-weight: 500; }
+.nav-item i { width: 20px; text-align: center; }
+.nav-item:hover, .nav-item.active { color: #fff; background: rgba(0, 168, 89, 0.15); transform: translateX(8px); box-shadow: -4px 4px 15px rgba(0,0,0,0.2); border-left: 3px solid var(--ansor-gold); }
+.sidebar-footer { padding: 20px; border-top: 1px solid rgba(255,255,255,0.05); }
+
+/* Header */
+.glass-header { padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); background: rgba(0,0,0,0.2); }
+.search-bar-3d { display: flex; align-items: center; background: rgba(255,255,255,0.05); padding: 10px 20px; border-radius: 30px; width: 400px; border: 1px solid rgba(255,255,255,0.1); transition: 0.3s; }
+.search-bar-3d:focus-within { border-color: var(--ansor-emerald); box-shadow: 0 0 20px rgba(0,168,89,0.2); }
+.search-bar-3d input { background: transparent; border: none; color: #fff; outline: none; margin-left: 10px; width: 100%; }
+.profile-3d { display: flex; align-items: center; gap: 15px; }
+.profile-info { display: flex; flex-direction: column; text-align: right; }
+.user-name { font-weight: bold; font-size: 0.95rem; }
+.user-role { font-size: 0.75rem; color: var(--ansor-gold); }
+.avatar-glass { width: 45px; height: 45px; border-radius: 12px; border: 2px solid var(--ansor-emerald); padding: 2px; }
+
+/* Tipografi & Grid 3D */
+.text-glow { font-size: 2.2rem; margin-bottom: 30px; font-weight: 800; background: linear-gradient(90deg, #fff, var(--ansor-emerald)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 4px 30px rgba(0, 168, 89, 0.4); }
+.grid-3d { display: grid; grid-template-columns: 1fr 1.8fr; gap: 30px; }
+.glass-card { background: rgba(255, 255, 255, 0.02); border: 1px solid var(--glass-border); border-radius: 20px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); transform-style: preserve-3d; transition: transform 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94); will-change: transform; position: relative; }
+.card-content-z { transform: translateZ(30px); pointer-events: auto; }
+.glass-card h3 { margin-bottom: 25px; color: #fff; font-size: 1.2rem; display: flex; align-items: center; gap: 10px; }
+.stat-number { font-size: 2.5rem; font-weight: 900; color: var(--ansor-gold); text-shadow: 0 0 20px rgba(255,215,0,0.3); }
+
+/* Form 3D */
+.input-3d { position: relative; margin-bottom: 25px; }
+.input-3d input, .input-3d select { width: 100%; padding: 15px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; color: #fff; font-size: 1rem; outline: none; transition: 0.3s; appearance: none; }
+.input-3d select option { background: var(--space-dark); color: #fff; }
+.input-3d label { position: absolute; left: 15px; top: 16px; color: #777; transition: 0.3s; pointer-events: none; }
+.input-3d input:focus, .input-3d input:not(:placeholder-shown), .input-3d select:focus, .input-3d select:valid { border-color: var(--ansor-emerald); box-shadow: 0 0 15px rgba(0, 168, 89, 0.2); }
+.input-3d input:focus ~ label, .input-3d input:not(:placeholder-shown) ~ label { top: -10px; left: 10px; font-size: 0.8rem; background: var(--space-dark); padding: 0 8px; color: var(--ansor-gold); border-radius: 4px; }
+.file-upload-3d { position: relative; margin-bottom: 25px; }
+.file-upload-3d input[type="file"] { position: absolute; width: 100%; height: 100%; opacity: 0; cursor: pointer; z-index: 10; }
+.upload-surface { border: 2px dashed rgba(255,255,255,0.2); border-radius: 10px; padding: 30px; text-align: center; color: #888; transition: 0.3s; background: rgba(0,0,0,0.2); }
+.file-upload-3d:hover .upload-surface { border-color: var(--ansor-emerald); background: rgba(0,168,89,0.05); color: #fff; }
+#preview-foto { display: none; width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-top: 15px; border: 2px solid var(--ansor-emerald); }
+
+/* Tombol */
+.btn-cyber { padding: 14px 24px; background: linear-gradient(45deg, #004d28, var(--ansor-emerald)); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; color: #fff; font-weight: 700; letter-spacing: 1px; cursor: pointer; position: relative; overflow: hidden; transform-style: preserve-3d; transition: all 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.3); display: inline-flex; align-items: center; gap: 8px; }
+.btn-cyber:hover { transform: translateZ(10px) translateY(-2px); box-shadow: 0 15px 25px rgba(0, 168, 89, 0.4); border-color: var(--ansor-gold); }
+.btn-danger { background: linear-gradient(45deg, #8b0000, #ff4500); }
+.btn-danger:hover { box-shadow: 0 15px 25px rgba(255, 0, 0, 0.4); border-color: #ffcccc; }
+.mt-4 { margin-top: 1rem; width: 100%; }
+.header-action-3d { display: flex; justify-content: space-between; align-items: flex-start; }
+.action-buttons { display: flex; gap: 15px; }
+
+/* Tabel Kaca */
+.table-responsive { overflow-x: auto; }
+.table-glass { width: 100%; border-collapse: separate; border-spacing: 0 8px; }
+.table-glass th { text-align: left; padding: 15px; color: var(--ansor-gold); font-weight: 600; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.table-glass td { padding: 16px 15px; background: rgba(0,0,0,0.2); backdrop-filter: blur(5px); }
+.table-glass tbody tr td:first-child { border-top-left-radius: 10px; border-bottom-left-radius: 10px; }
+.table-glass tbody tr td:last-child { border-top-right-radius: 10px; border-bottom-right-radius: 10px; }
+.table-glass tbody tr { transition: transform 0.3s, box-shadow 0.3s; }
+.table-glass tbody tr:hover { transform: scale(1.01) translateZ(5px); background: rgba(255,255,255,0.05); box-shadow: 0 5px 15px rgba(0,0,0,0.2); cursor: default; }
+
+/* Bagan Organisasi */
+.org-hologram { text-align: center; margin-top: 30px; padding-bottom: 50px; }
+.org-tier { display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; margin-bottom: 40px; position: relative; }
+.node-hologram { background: rgba(0, 20, 10, 0.7); border: 1px solid rgba(0, 168, 89, 0.5); border-radius: 16px; padding: 25px 20px; width: 220px; box-shadow: 0 0 25px rgba(0, 168, 89, 0.15), inset 0 0 20px rgba(0,0,0,0.5); position: relative; backdrop-filter: blur(10px); transition: 0.3s; transform-style: preserve-3d; }
+.node-hologram:hover { transform: translateZ(20px) scale(1.05); box-shadow: 0 0 35px rgba(255, 215, 0, 0.3); border-color: var(--ansor-gold); z-index: 10; }
+.node-hologram img { width: 90px; height: 90px; border-radius: 50%; border: 3px solid var(--ansor-gold); box-shadow: 0 0 15px rgba(255, 215, 0, 0.5); margin-bottom: 15px; object-fit: cover; background: #fff; }
+.node-hologram .nama { font-weight: 800; color: #fff; font-size: 1.1rem; margin-bottom: 5px; }
+.node-hologram .jabatan { color: var(--ansor-gold); font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; padding: 4px 10px; background: rgba(255,215,0,0.1); border-radius: 20px; display: inline-block; }
+.btn-delete-node { position: absolute; top: -10px; right: -10px; background: #ff4d4d; color: white; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; box-shadow: 0 0 10px red; display: none; }
+.node-hologram:hover .btn-delete-node { display: block; }
+
+/* Modal & RBAC Helper */
+.glass-modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.7); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); z-index: 1000; display: none; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s; }
+.glass-modal-overlay.active { display: flex; opacity: 1; }
+.glass-modal { background: rgba(5, 15, 20, 0.85); border: 1px solid var(--ansor-emerald); border-radius: 20px; padding: 40px; width: 100%; max-width: 500px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.8); }
+.close-modal { position: absolute; top: 20px; right: 20px; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; transition: 0.3s; }
+.close-modal:hover { color: var(--ansor-gold); transform: scale(1.2); }
+.hidden-role { display: none !important; }
+
+/* Mode Cetak (PDF LPJ Generator) */
+@media print {
+    @page { size: A4 landscape; margin: 15mm; }
+    body, html { background: #fff !important; color: #000 !important; }
+    
+    .ambient-background, .glass-sidebar, .glass-header, .header-action-3d, .glass-modal-overlay, #login-overlay { display: none !important; }
+    
+    .glass-container, .workspace, #hologram-views { border: none !important; box-shadow: none !important; margin: 0 !important; padding: 0 !important; height: auto !important; overflow: visible !important; width: 100% !important; background: transparent !important; backdrop-filter: none !important; }
+    
+    .view-layer { display: none; transform: none !important; opacity: 1 !important; animation: none !important; }
+    .view-layer.active { display: block !important; }
+    
+    .text-glow { color: #000 !important; text-shadow: none !important; background: none !important; -webkit-text-fill-color: #000 !important; text-align: center; border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 30px; font-size: 18pt; }
+    
+    .org-hologram { margin: 0 !important; padding: 0 !important; }
+    .node-hologram { background: transparent !important; border: 2px solid #000 !important; box-shadow: none !important; color: #000 !important; transform: none !important; break-inside: avoid; margin-bottom: 15px; }
+    .node-hologram img { border: 2px solid #000 !important; box-shadow: none !important; }
+    .node-hologram .nama, .node-hologram .jabatan { color: #000 !important; background: transparent !important; font-weight: bold; }
+    .btn-delete-node { display: none !important; }
+
+    .table-glass th { color: #000 !important; border-bottom: 2px solid #000 !important; }
+    .table-glass td { background: transparent !important; border-bottom: 1px solid #ccc !important; }
+    .grid-3d { display: block !important; }
+    .form-complex { display: none !important; }
+}
